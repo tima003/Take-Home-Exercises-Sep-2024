@@ -1,0 +1,70 @@
+﻿@page "/reviewReport"
+<PageTitle>Review Report</PageTitle>
+@rendermode InteractiveServer
+@using BookSystem;
+
+
+<h1>Review Report</h1>
+
+@if (feedback.Length > 0)
+{
+    <div class="alert alert-info">
+        <p>@feedback</p>
+    </div>
+}
+
+@if (errormsgs.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p>Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in errormsgs)
+            {
+                
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+@*
+    
+*@
+@if (reviews == null)
+{
+    <p>You need to have a csv file containing your employment data.</p>
+}
+else if (reviews.Count == 0)
+{
+    <p>No Employments to report</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Reviewer</th>
+                <th>Rating</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in reviews)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Author</td>
+                    <td>@item.Reviewer</td>
+                    <td>@item.Rating</td>
+                    <td>@item.Comment</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+}

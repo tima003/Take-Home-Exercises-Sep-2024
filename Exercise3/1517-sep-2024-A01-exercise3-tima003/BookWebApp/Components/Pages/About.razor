@@ -1,0 +1,32 @@
+﻿@page "/About"
+@rendermode InteractiveServer
+
+<PageTitle>About</PageTitle>
+
+<h1>Exercise 3 - sept 2024</h1>
+<hr/>
+<h2><strong>Author:</strong>@_author</h2>
+<h2><strong>Section:</strong>@_section</h2>
+<h2><strong>Instructor:</strong>@_instructor</h2>
+<h2><strong >Known Bugs:</strong></h2>
+<ul>
+    @foreach (var bug in _bugs)
+    {
+        <li>@bug</li>
+    }
+</ul>
+
+
+
+@code 
+{
+    private string _author = "Fatima khalif";
+    private string _section = "A01";
+    private string _instructor ="Don Welch";
+    private string[] _bugs = [
+                "Some fields may not validate correctly for required input.",
+                "The `Parse` method may throw errors with inconsistent formats.",
+                "Issues with reading or writing `TestData.csv` due to permissions.",
+                "Potential incorrect redirects and display issues on smaller screens."
+    ];
+}

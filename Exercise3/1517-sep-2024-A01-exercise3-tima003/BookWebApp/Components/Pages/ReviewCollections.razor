@@ -1,0 +1,129 @@
+﻿@page "/reviewcollection"
+<PageTitle>Review Collection</PageTitle>
+@rendermode InteractiveServer
+
+@using BookWebApp;
+@using BookSystem;
+
+<h1>Review Collection</h1>
+
+<div class="row">
+    <div class="offset-1 col-md-10">
+        <blockquote style="background-color:gainsboro;">
+            <p>
+                Use this form to submit book reviews. All fields are required. Select an author from the provided list, and fill out the necessary fields.
+            </p>
+        </blockquote>
+    </div>
+</div>
+
+@if (feedback.Length > 0)
+{
+    <div class="alert alert-info">
+        <p>@feedback</p>
+    </div>
+}
+
+@if (errormsgs.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p>Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in errormsgs)
+            {
+                <li>@error.Value</li>
+            }
+        </ul>
+    </div>
+}
+
+<fieldset>
+    <legend>Review Data</legend>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label for="isbn">ISBN <span style="color: red">*</span>:</label>
+        </div>
+        <div class="col-md-2">
+            <input type="text" id="isbn" @bind="ISBN" placeholder="Enter ISBN" />
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-2">
+            <label for="title">Title <span style="color: red">*</span>:</label>
+        </div>
+        <div class="col-md-2">
+            <input type="text" id="title" @bind="Title" placeholder="Enter book title" />
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-2">
+            <label for="author">Author <span style="color: red">*</span>:</label>
+        </div>
+        <div class="col-md-2">
+            <select id="author" @bind="Author">
+                <option value="">Select an author...</option>
+                @foreach (var author in _author.Author_GetList())
+                {
+                    <option value="@author">@author</option>
+                }
+            </select>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-2">
+            <label for="reviewer">Reviewer Name <span style="color: red">*</span>:</label>
+        </div>
+        <div class="col-md-2">
+            <input type="text" id="reviewer" @bind="Reviewer" placeholder="Enter your name" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+    <div class="col-md-2">
+        <label for="author">Rating <span style="color: red">*</span>:</label>
+    </div>
+    <div class="col-md-2">
+        <select id="rating" @bind="Rating">
+            <option value="">Select an rating...</option>
+            @foreach(var item in Enum.GetValues(typeof(RatingType)))
+                {
+                    <option value="@item">@item</option>
+                }
+        </select>
+    </div>
+</div>
+<br />
+
+    <div class="row">
+        <div class="col-md-2">
+            <label for="comment">Comment <span style="color: red">*</span>:</label>
+        </div>
+        <div class="col-md-4">
+            <textarea id="comment" @bind="Comment" placeholder="Enter your review here"></textarea>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-outline-primary rounded-pill" @onclick="OnCollect">
+                Collect
+            </button>
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-outline-secondary rounded-pill" @onclick="OnClear">
+                Clear
+            </button>
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-outline-secondary rounded-pill" @onclick="GoToReport">
+                Go to Report
+            </button>
+        </div>
+    </div>
+</fieldset>
