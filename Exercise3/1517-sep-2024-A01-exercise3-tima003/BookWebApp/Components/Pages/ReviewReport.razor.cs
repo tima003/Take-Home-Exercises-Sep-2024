@@ -35,7 +35,8 @@ namespace BookWebApp.Components.Pages
 
 
             string filepathname = @"./Data/";
-            string[] filenames = new string[] { "BadData.csv" };
+            string[] filenames = new string[] { "TestData.csv" };
+            string[] filenames1 = new string[] { "BadData.csv" };
             string filename = @$"{filepathname}{filenames[0]}";
 
 
